@@ -1,0 +1,87 @@
+{
+    "template": "pfsense_log",
+    "settings": {
+	"index.refresh_interval": "5s"
+    },
+    "mappings": {
+        "_default_": {
+            "dynamic_templates": [
+           {
+              "message_field": {
+                 "mapping": {
+                    "index": "analyzed",
+                    "omit_norms": true,
+                    "type": "string"
+                 },
+                 "match_mapping_type": "string",
+                 "match": "message"
+              }
+           },
+           {
+              "string_fields": {
+                 "mapping": {
+                    "index": "analyzed",
+                    "omit_norms": true,
+                    "type": "string",
+                    "fields": {
+                       "raw": {
+                          "index": "not_analyzed",
+                          "ignore_above": 256,
+                          "type": "string"
+                       }
+                    }
+                 },
+                 "match_mapping_type": "string",
+                 "match": "*"
+              }
+           }
+        ],
+            "properties": {
+                "date": {
+                    "type": "date",
+                    "format": "date_time_no_millis"
+                },
+                "proxy": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "ip_source": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "header1": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "protocole": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "http_status_code": {
+                    "type": "integer",
+                    "index": "not_analyzed"
+                },
+                "fqdn_destination": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "status": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "label_destination": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "squid": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "ip_destination": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                }
+            }
+        }
+    }
+}
